@@ -41,8 +41,8 @@ public class TestController {
 
     }
 
-    @PutMapping(path = "/test/put/{id}")
-    public TestModel put(@RequestBody TestModel test, Long id) {
+    @PutMapping(path = "/test/put")
+    public TestModel put(@RequestBody TestModel test) {
         return this.testService.post(test);
     }
 
