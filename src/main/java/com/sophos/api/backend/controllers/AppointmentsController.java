@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sophos.api.backend.models.AppointmentsModel;
-import com.sophos.api.backend.service.AppointmentsService;
+import com.sophos.api.backend.service.impl.AppointmentsService;
 
 @RequestMapping(path = "/datacontroller/api")
 @RestController

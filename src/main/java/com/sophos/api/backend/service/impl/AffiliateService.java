@@ -1,4 +1,4 @@
-package com.sophos.api.backend.service;
+package com.sophos.api.backend.service.impl;
 
 import com.sophos.api.backend.models.AffiliateModel;
 import com.sophos.api.backend.repository.AffiliateRepository;

@@ -1,7 +1,8 @@
 package com.sophos.api.backend.controllers;
 
 import com.sophos.api.backend.models.AffiliateModel;
-import com.sophos.api.backend.service.AffiliateService;
+import com.sophos.api.backend.service.impl.AffiliateService;
+
 import java.util.ArrayList;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;

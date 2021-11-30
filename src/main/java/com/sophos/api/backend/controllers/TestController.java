@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sophos.api.backend.models.TestModel;
-import com.sophos.api.backend.service.TestService;
+import com.sophos.api.backend.service.impl.TestService;
 
 @RequestMapping(path = "/datacontroller/api")
 @RestController
