@@ -19,11 +19,14 @@ public class TestService implements ITestService{
 	public ArrayList<TestModel> getList() {
 		return (ArrayList<TestModel>) testRepository.findAll();
 	}
-	
 
 	@Override
-	public Optional<TestModel> getById(Long id) {
-		return testRepository.findById(id);
+	public TestModel getById(Long id) {
+		Optional<TestModel> test = testRepository.findById(id);
+		if(test.isPresent()) {
+			return test.get();
+		}
+		return null;
 
 	}
 
@@ -33,7 +36,7 @@ public class TestService implements ITestService{
 	}
 
 	@Override
-	public TestModel put(TestModel test) {
+	public TestModel put(TestModel test, Long id) {
 		return testRepository.save(test);
 	}
 

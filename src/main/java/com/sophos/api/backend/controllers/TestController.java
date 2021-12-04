@@ -2,8 +2,9 @@ package com.sophos.api.backend.controllers;
 
 import java.util.ArrayList;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,46 +15,68 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sophos.api.backend.models.TestModel;
-import com.sophos.api.backend.service.impl.TestService;
+import com.sophos.api.backend.service.ITestService;
 
-@RequestMapping(path = "/datacontroller/api")
+@RequestMapping("/datacontroller/api/test")
 @RestController
 public class TestController {
 
-    @Autowired
-    private TestService testService;
+	@Autowired
+	private ITestService testService;
 
-    @GetMapping(path = "/test/get")
-    public ArrayList<TestModel> getList() {
-        return testService.getList();
+	@GetMapping("/get")
+	public ResponseEntity<ArrayList<TestModel>> getList() {
+		ArrayList<TestModel> tests = testService.getList();
+		if (tests == null) {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 
-    }
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(tests);
 
-    @GetMapping(path = "/test/get/{id}")
-    public Optional<TestModel> getById(@PathVariable("id") Long id) {
-        return this.testService.getById(id);
+	}
 
-    }
+	@GetMapping("/get/{id}")
+	public Object getById(@PathVariable("id") Long id) {
+		TestModel test = testService.getById(id);
+		if (test != null) {
+			return ResponseEntity.status(HttpStatus.OK).body(test);
 
-    @PostMapping(path = "/test/post")
-    public TestModel post(@RequestBody TestModel test) {
-        return this.testService.post(test);
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe el registro");
+	}
 
-    }
+	@PostMapping("/post")
+	public ResponseEntity<TestModel> post(@RequestBody TestModel test) {
+		if (test.getId() == null) {
 
-    @PutMapping(path = "/test/put")
-    public TestModel put(@RequestBody TestModel test) {
-        return this.testService.post(test);
-    }
+			TestModel nuevoTest = testService.post(test);
+			return ResponseEntity.status(HttpStatus.CREATED).body(nuevoTest);
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+	}
 
-    @DeleteMapping(path = "/test/delete/{id}")
-    public String deleteById(@PathVariable("id") Long id) {
-        boolean ok = this.testService.deleteById(id);
-        if (ok) {
-            return "Registro eliminado";
-        } else {
-            return "No se elimino el registro";
-        }
-    }
+	@PutMapping("/put/{id}")
+	public ResponseEntity<Object> put(@PathVariable("id") Long id, @RequestBody TestModel test) {
+		Optional<TestModel> testFound = Optional.ofNullable((testService.getById(test.getId())));
+		if (testFound.isPresent()) {
+			TestModel testMod = testService.put(test, id);
+			return ResponseEntity.status(HttpStatus.CREATED).body(testMod);
+		}
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El registro no existe en Base de Datos");
+	}
+
+	@DeleteMapping("/delete/{id}")
+	public Object deleteById(@PathVariable("id") Long id) {
+		// TestModel test = testService.getById(id);
+		boolean ok = this.testService.deleteById(id);
+		if (ok) {
+
+			return ResponseEntity.status(HttpStatus.OK).body("Registro eliminado satisfactoriamente");
+
+		} else {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+		}
+	}
 
 }

@@ -5,15 +5,15 @@ import java.util.Optional;
 import com.sophos.api.backend.models.AppointmentsModel;
 
 public interface IAppointmentService {
-	
-	ArrayList<AppointmentsModel> getList(); 
-	
-    Optional<AppointmentsModel> getById(Long id);
 
-    AppointmentsModel post(AppointmentsModel test);
-    
-    AppointmentsModel put(AppointmentsModel test);
+	ArrayList<AppointmentsModel> getList();
 
-    boolean deleteById(Long id);
+	Optional<AppointmentsModel> getById(Long id);
+
+	AppointmentsModel post(AppointmentsModel test);
+
+	AppointmentsModel put(AppointmentsModel test);
+
+	boolean deleteById(Long id);
 
 }

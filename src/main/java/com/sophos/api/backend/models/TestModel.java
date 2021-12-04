@@ -13,12 +13,12 @@ import lombok.NoArgsConstructor;
 @Data
 public class TestModel implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String name;
-    private String descripcion;
+	private String name;
+	private String descripcion;
 }

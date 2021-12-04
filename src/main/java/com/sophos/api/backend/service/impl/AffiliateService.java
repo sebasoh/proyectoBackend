@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AffiliateService implements IAffiliateService {
 
-    @Autowired
-    private AffiliateRepository affiliateRepository;
+	@Autowired
+	private AffiliateRepository affiliateRepository;
 
 	@Override
 	public ArrayList<AffiliateModel> getList() {
@@ -23,9 +23,9 @@ public class AffiliateService implements IAffiliateService {
 	@Override
 	public AffiliateModel getById(Long id) {
 		Optional<AffiliateModel> affiliate = affiliateRepository.findById(id);
-		if(affiliate.isPresent()) {
-		return affiliate.get();
-		}else {
+		if (affiliate.isPresent()) {
+			return affiliate.get();
+		} else {
 			return null;
 		}
 	}
@@ -40,25 +40,24 @@ public class AffiliateService implements IAffiliateService {
 		try {
 			Optional<AffiliateModel> affiliateFound = affiliateRepository.findById(id);
 			if (affiliateFound.isPresent()) {
-			return affiliateRepository.save(affiliate);
-		}
-		}catch(Exception e) {
+				return affiliateRepository.save(affiliate);
+			}
+		} catch (Exception e) {
 			return null;
-		
-			
+
 		}
 		return affiliateRepository.save(affiliate);
-		
+
 	}
 
 	@Override
 	public boolean deleteById(Long id) {
 		try {
 			affiliateRepository.deleteById(id);
-            return true;
-        } catch (Exception error) {
-            return false;
-        }
+			return true;
+		} catch (Exception error) {
+			return false;
+		}
 	}
-	
+
 }

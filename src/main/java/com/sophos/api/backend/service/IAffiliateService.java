@@ -5,16 +5,15 @@ import java.util.ArrayList;
 import com.sophos.api.backend.models.AffiliateModel;
 
 public interface IAffiliateService {
-		
-		ArrayList<AffiliateModel> getList(); 
-	
-	    AffiliateModel getById(Long id);
 
-	    AffiliateModel post(AffiliateModel test);
-	    
-	    AffiliateModel put(AffiliateModel test, Long id);
+	ArrayList<AffiliateModel> getList();
 
-	    boolean deleteById(Long id);
-	    
+	AffiliateModel getById(Long id);
+
+	AffiliateModel post(AffiliateModel test);
+
+	AffiliateModel put(AffiliateModel test, Long id);
+
+	boolean deleteById(Long id);
 
 }
